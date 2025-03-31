@@ -14,6 +14,10 @@
 - [ ] Implement more comprehensive error handling
 - [ ] Add logging throughout the application
 - [ ] Create more detailed docstrings and type hints
+- [ ] Fix test suite import and module resolution issues
+  - Resolve current test failures related to module imports
+  - Ensure proper package structure supports test discovery
+  - Verify correct import paths in test and source files
 
 ### Feature Development
 - [ ] Implement advanced memory merging logic
