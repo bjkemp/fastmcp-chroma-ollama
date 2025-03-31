@@ -2,19 +2,28 @@
 
 ## Overview
 
-A local memory system for LLM assistants using ChromaDB, Ollama, and FastMCP. This project provides a persistent, semantically-aware memory storage and retrieval system with advanced features like memory importance scoring, automatic merging, and intelligent pruning.
+A sophisticated, local memory system for AI assistants using ChromaDB, Ollama, and FastMCP. This project provides a persistent, semantically-aware memory storage and retrieval system with advanced features like memory importance scoring, automatic merging, and intelligent pruning.
 
-## Requirements
+## 🌟 Features
 
-- Python 3.8+
+- 🧠 Semantic Memory Storage
+- 🔒 Local-first Architecture
+- 🚀 High-Performance Vector Search
+- 🤖 Ollama Embedding Support
+- 📊 Memory Importance Scoring
+- 🔍 Advanced Retrieval Mechanisms
+
+## 🛠 Requirements
+
+- Python 3.10+
 - [UV Package Manager](https://github.com/astral-sh/uv)
-- Ollama
+- [Ollama](https://ollama.ai/)
 - ChromaDB
 - FastMCP
 
-## Installation
+## 📦 Installation
 
-### Install UV Package Manager
+### 1. Install UV Package Manager
 
 ```bash
 # macOS/Linux
@@ -24,57 +33,43 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### Project Setup
+### 2. Install Ollama
 
-1. Clone the repository:
-```bash
-git clone https://github.com/bjkemp/fastmcp-chroma-ollama.git
-cd fastmcp-chroma-ollama
-```
-
-2. Install Ollama:
 ```bash
 curl https://ollama.ai/install.sh | sh
 ollama pull nomic-embed-text
 ```
 
-3. Create and activate virtual environment:
-```bash
-uv venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
+### 3. Install Project
 
-4. Install dependencies:
 ```bash
+# Clone the repository
+git clone https://github.com/bjkemp/fastmcp-chroma-ollama.git
+cd fastmcp-chroma-ollama
+
+# Create virtual environment
+uv venv
+
+# Activate virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install project
 uv pip install -e .
 ```
 
-## Development Setup
-
-### Install Development Dependencies
-```bash
-uv pip install .[dev]
-```
-
-### Running Tests
-```bash
-uv run pytest tests/
-```
-
-## Usage
+## 🚀 Usage
 
 ### Starting the Server
 
-#### CLI
 ```bash
-# Using UV
+# With stdio transport (for Claude Desktop)
 uv run -m fastmcp_memory.server --transport stdio
 
-# Or directly
-python -m fastmcp_memory.server --transport stdio
+# With SSE transport
+uv run -m fastmcp_memory.server --transport sse --port 8080
 ```
 
-### Basic Client Example
+### Basic Python Example
 
 ```python
 from fastmcp_memory import MemoryManager
@@ -90,17 +85,32 @@ async def example():
     print(memories)
 ```
 
-## Project Structure
+## 🧪 Development
+
+### Setup Development Environment
+
+```bash
+# Install development dependencies
+uv pip install .[dev]
+
+# Run tests
+uv run pytest
+
+# Run code formatters
+uv run black src tests
+uv run isort src tests
+```
+
+## 📋 Project Structure
 
 ```
 fastmcp-chroma-ollama/
 ├── src/
 │   └── fastmcp_memory/
 │       ├── __init__.py
-│       ├── memory.py
 │       ├── server.py
-│       ├── client.py
-│       └── example_client.py
+│       ├── server_core.py
+│       └── ...
 ├── tests/
 ├── .github/
 │   └── workflows/
@@ -110,35 +120,21 @@ fastmcp-chroma-ollama/
 └── LICENSE
 ```
 
-## Development Workflow
+## 🤝 Contributing
 
-### Running Checks
-```bash
-# Run tests
-uv run pytest
+Contributions are welcome! Please check our [TODO.md](TODO.md) for current development priorities and see our contribution guidelines.
 
-# Format code
-uv run black src tests
-
-# Sort imports
-uv run isort src tests
-```
-
-## Contributing
-
-Contributions are welcome! Please check the [TODO.md](TODO.md) for current development priorities.
-
-## License
+## 📄 License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-## Roadmap
+## 🗺 Roadmap
 
 Check out [TODO.md](TODO.md) for detailed development plans and future directions.
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 - [ChromaDB](https://docs.trychroma.com/)
 - [Ollama](https://ollama.ai/)
-- [FastMCP](https://github.com/punkpeye/fastmcp)
+- [FastMCP](https://github.com/jlowin/fastmcp)
 - [UV Package Manager](https://github.com/astral-sh/uv)
