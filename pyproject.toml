@@ -60,3 +60,12 @@ target-version = ['py38']
 [tool.isort]
 profile = "black"
 multi_line_output = 3
+
+# UV-specific run scripts
+[tool.uv.run]
+test = "pytest tests/"
+format = "black src tests"
+lint = "isort src tests"
+type-check = "mypy src tests"
+server = "python -m fastmcp_memory.server"
+client = "python -m fastmcp_memory.client"

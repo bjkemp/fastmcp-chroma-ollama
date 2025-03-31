@@ -21,16 +21,25 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     
+    - name: Install UV
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        $HOME/.cargo/bin/uv --version
+    
     - name: Install Ollama
       run: |
         curl https://ollama.ai/install.sh | sh
         ollama pull nomic-embed-text
     
-    - name: Install dependencies
+    - name: Create Virtual Environment
       run: |
-        python -m pip install --upgrade pip
-        pip install .[dev]
+        $HOME/.cargo/bin/uv venv
+        source .venv/bin/activate
     
-    - name: Run tests
+    - name: Install Dependencies
       run: |
-        pytest
+        $HOME/.cargo/bin/uv pip install .[dev]
+    
+    - name: Run Tests
+      run: |
+        $HOME/.cargo/bin/uv run pytest
