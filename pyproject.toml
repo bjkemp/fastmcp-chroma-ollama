@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastmcp-memory"
+version = "0.1.0"
+description = "Local memory system for LLM assistants using ChromaDB, Ollama, and FastMCP"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "B.J. Kemp", email = "bjkemp@users.noreply.github.com"}
+]
+keywords = ["llm", "memory", "chromadb", "ollama", "fastmcp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "fastmcp @ git+https://github.com/punkpeye/fastmcp.git",
+    "chromadb>=0.4.18",
+    "uvicorn>=0.23.0",
+    "fastapi>=0.100.0",
+    "ollama>=0.1.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.3.1",
+    "pytest-asyncio>=0.21.0",
+    "mypy>=1.4.0",
+    "black>=23.3.0",
+    "isort>=5.12.0",
+]
+
+[project.scripts]
+fastmcp-memory-server = "fastmcp_memory.server:main"
+fastmcp-memory-client = "fastmcp_memory.client:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3

@@ -22,43 +22,53 @@ A local memory system for LLM assistants using ChromaDB, Ollama, and FastMCP. Th
 
 ## Installation
 
-1. Install Ollama:
+### From PyPI (Coming Soon)
 ```bash
-curl https://ollama.ai/install.sh | sh
-ollama pull nomic-embed-text
+pip install fastmcp-memory
 ```
 
-2. Clone the repository:
+### From GitHub
+```bash
+pip install git+https://github.com/bjkemp/fastmcp-chroma-ollama.git
+```
+
+### Manual Installation
+1. Clone the repository:
 ```bash
 git clone https://github.com/bjkemp/fastmcp-chroma-ollama.git
 cd fastmcp-chroma-ollama
+```
+
+2. Install Ollama:
+```bash
+curl https://ollama.ai/install.sh | sh
+ollama pull nomic-embed-text
 ```
 
 3. Install dependencies:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Usage
 
 ### Starting the Server
 
-#### STDIO Transport (for Claude Desktop):
+#### CLI
 ```bash
-python server.py --transport stdio
-```
+# Using the installed script
+fastmcp-memory-server --transport stdio
 
-#### SSE Transport (for web applications):
-```bash
-python server.py --transport sse --port 8080
+# Or directly
+python -m fastmcp_memory.server --transport stdio
 ```
 
 ### Basic Client Example
 
 ```python
-from memory import MemoryManager
+from fastmcp_memory import MemoryManager
 
 async def example():
     manager = MemoryManager()
@@ -71,7 +81,35 @@ async def example():
     print(memories)
 ```
 
-## Contributing
+## Project Structure
+
+```
+fastmcp-chroma-ollama/
+├── src/
+│   └── fastmcp_memory/
+│       ├── __init__.py
+│       ├── memory.py
+│       ├── server.py
+│       ├── client.py
+│       └── example_client.py
+├── tests/
+├── .github/
+│   └── workflows/
+├── pyproject.toml
+├── README.md
+├── TODO.md
+└── LICENSE
+```
+
+## Development
+
+### Running Tests
+```bash
+pip install .[dev]
+pytest tests/
+```
+
+### Contributing
 
 Contributions are welcome! Please check the [TODO.md](TODO.md) for current development priorities.
 
